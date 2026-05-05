@@ -42,6 +42,7 @@ export function createKeys(storage) {
     return btoa(String.fromCharCode(...new Uint8Array(rawBytes)));
   }
 
+  /** @returns {void} */
   function clear() {
     storage.setItem(KEYPAIR_KEY, '');
   }

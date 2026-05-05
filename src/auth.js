@@ -61,6 +61,7 @@ export function createAuth(baseUrl, storage) {
     return storage.getItem(TOKEN_KEY) || null;
   }
 
+  /** @returns {void} */
   function clearToken() {
     storage.setItem(TOKEN_KEY, '');
   }
