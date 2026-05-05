@@ -1,0 +1,32 @@
+{
+  "name": "browser-metered-client",
+  "version": "0.1.0",
+  "description": "Minimal JavaScript client library for browser-metered-proxy",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "files": [
+    "index.js",
+    "src/"
+  ],
+  "keywords": [
+    "browser-metered",
+    "proxy",
+    "ed25519",
+    "webcrypto"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "vitest": "^2.0.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/emerson-argueta/browser-metered-client"
+  }
+}
