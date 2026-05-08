@@ -1,4 +1,4 @@
-import { ProxyError } from './errors.js';
+import { ProxyError, InsufficientBalanceError } from './errors.js';
 
 /**
  * @param {string} baseUrl
@@ -40,7 +40,10 @@ export function createInvoke(baseUrl, auth, keys) {
 
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
-      throw new ProxyError(res.status, data.error || res.statusText);
+      if (res.status === 402 && data.code === 'insufficient_balance') {
+        throw new InsufficientBalanceError(data.error || 'Insufficient balance');
+      }
+      throw new ProxyError(res.status, data.error || res.statusText, data.code);
     }
 
     return res.json();
