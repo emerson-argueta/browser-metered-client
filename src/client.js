@@ -1,6 +1,6 @@
 import { createAuth } from './auth.js';
 import { createKeys } from './keys.js';
-import { createInvoke } from './invoke.js';
+import { createInvoke, createQuote } from './invoke.js';
 import { createUsage } from './usage.js';
 
 /**
@@ -19,7 +19,8 @@ export function createClient({ baseUrl, storage = localStorage }) {
   const auth = createAuth(baseUrl, storage);
   const keys = createKeys(storage);
   const invoke = createInvoke(baseUrl, auth, keys);
+  const quote = createQuote(baseUrl, auth);
   const usage = createUsage(baseUrl, auth);
 
-  return { auth, keys, invoke, usage };
+  return { auth, keys, invoke, quote, usage };
 }

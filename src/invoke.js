@@ -5,6 +5,22 @@ import { ProxyError, InsufficientBalanceError } from './errors.js';
  * @param {{ getToken: () => string|null }} auth
  * @param {{ publicKey: () => Promise<string|null>, sign: (msg: string) => Promise<string> }} keys
  */
+export function createQuote(baseUrl, auth) {
+  async function quote(capability) {
+    const token = auth.getToken();
+    const headers = {};
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+
+    const res = await fetch(`${baseUrl}/api/capability/quote?capability=${encodeURIComponent(capability)}`, { headers });
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new ProxyError(res.status, data.error || res.statusText);
+    }
+    return res.json();
+  }
+  return quote;
+}
+
 export function createInvoke(baseUrl, auth, keys) {
   /**
    * @param {string} capability - The capability name (e.g. "verify_income")
